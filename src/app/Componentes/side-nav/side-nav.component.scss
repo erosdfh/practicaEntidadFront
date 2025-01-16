@@ -1,0 +1,12 @@
+.nav-caption,
+mat-icon {
+  color: rgba(0, 0, 0, 0.9);
+}
+a.active {
+  content: "";
+  position: absolute;
+  border-bottom: 3px solid var(--secondary);
+}
+mat-nav-list a.underline {
+  position: relative;
+}

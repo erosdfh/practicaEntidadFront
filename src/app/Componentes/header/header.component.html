@@ -1,0 +1,18 @@
+<mat-toolbar class="bg-white" id="header">
+    <nav mat-tab-nav-bar class="ms-auto d-none d-sm-none d-lg-block" >
+          <a
+          mat-tab-link
+          disableRipple
+          *ngFor="let link of links"
+          [routerLink]="link.url"
+          [active]="router.isActive(link.url, true)"
+          >
+         {{link.ruta}}
+          </a>
+    </nav>
+    <div class="ms-auto d-block d-sm-block d-lg-none">
+      <button class="text-dark bg-white border-0" mat-button (click)="onToggleSidenav()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>

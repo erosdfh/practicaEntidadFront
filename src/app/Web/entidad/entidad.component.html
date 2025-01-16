@@ -1,0 +1,165 @@
+<app-header (SidenavToggle)="sidenav.toggle()"></app-header>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation" position="end" [fixedInViewport]="true">
+    <app-side-nav (CloseSidenav)="sidenav.close()"></app-side-nav>
+  </mat-sidenav>
+  <main>
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-12">
+      <fieldset class="linea-caja">
+        <legend style="font-size: 16px;">Entidades</legend>
+
+        <form [formGroup]="formGroupParent">
+
+          <div class="row" style="font-size: 14px;">
+            <div class="col-12 form-group row my-2">
+              <label
+                for="tipoContribuyente"
+                class="control-label col-xl-2 col-lg-2 col-md-2 col-sm-3"
+              >
+                Tipo contribuyente
+              </label>
+              <div class="col-sm-6">
+                <select
+                  id="tipoContribuyente"
+                  class="form-select"
+                  formControlName="tipoContribuyente"
+                  [ngClass]="{
+                    'is-invalid': formGroupParent.get('tipoContribuyente')?.invalid && formGroupParent.get('tipoContribuyente')?.touched
+                  }"
+                >
+                  <option value="" disabled>Seleccione...</option>
+                  <option *ngFor="let opcion of listTipoContribuyentes" [value]="opcion.id_tipo_contribuyente">
+                    {{ opcion.nombre }}
+                  </option>
+                </select>
+                <div class="invalid-feedback">
+                  Este campo es obligatorio.
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-12 form-group row my-3">
+              <label for="tipoDocumento" class="control-label col-xl-2 col-lg-2 col-md-2 col-sm-3">
+                Tipo documento <span class="text-danger">*</span>
+              </label>
+              <div class="col-sm-6">
+                <select 
+                  id="tipoDocumento" 
+                  class="form-select" 
+                  formControlName="tipoDocumento" 
+                  [ngClass]="{'is-invalid': formGroupParent.get('tipoDocumento')?.invalid && formGroupParent.get('tipoDocumento')?.touched}"
+                >
+                  <option value="" disabled selected>Seleccione...</option>
+                  <option *ngFor="let opcion of listTipoDocuments" [value]="opcion.id_tipo_documento">
+                    {{ opcion.nombre }}
+                  </option>
+                </select>
+                <div class="invalid-feedback" *ngIf="formGroupParent.get('tipoDocumento')?.invalid && formGroupParent.get('tipoDocumento')?.touched">
+                  Este campo es obligatorio.
+                </div>
+              </div>
+            </div>
+            
+
+            <div class="col-12 form-group row">
+              <label for="numDocument" class="control-label col-xl-2 col-lg-2 col-md-2 col-sm-3">Numero
+                documento</label>
+              <div class="col-sm-6">
+                <input formControlName="numDocument" id="numDocument" type="text" maxlength="8" class="form-control" 
+                [ngClass]="{ 'is-invalid': formGroupParent.get('numDocument')?.invalid && formGroupParent.get('numDocument')?.touched }"/>
+                <div class="invalid-feedback">
+                  Este campo es obligatorio.
+                </div>
+              </div>
+              
+            </div>
+
+
+            <div class="col-12 mt-4 form-group row">
+              <label for="rSocial" class="control-label col-xl-2 col-lg-2 col-md-2 col-sm-3">Razón social</label>
+              <div class="col-sm-6">
+                <input type="text" formControlName="rSocial" id="rSocial" class="form-control" 
+                [ngClass]="{ 'is-invalid': formGroupParent.get('rSocial')?.invalid && formGroupParent.get('rSocial')?.touched }"/>
+                <div class="invalid-feedback">
+                  Este campo es obligatorio.
+                </div>
+              </div>
+            </div>
+            <div class="col-12 mt-4 form-group row">
+              <label for="nomComercial" class="control-label col-xl-2 col-lg-2 col-md-2 col-sm-3">Nombre
+                comercial</label>
+              <div class="col-sm-6">
+                <input type="text" formControlName="nomComercial" id="nomComercial" class="form-control" />
+              </div>
+            </div>
+            <div class="col-12 mt-4 form-group row">
+              <label for="direccion" class="control-label col-xl-2 col-lg-2 col-md-2 col-sm-3">Dirección</label>
+              <div class="col-sm-6">
+                <input type="text" formControlName="direccion" id="direccion" class="form-control" />
+              </div>
+            </div>
+            <div class="col-12 mt-4 form-group row">
+              <label for="telefono" class="control-label col-xl-2 col-lg-2 col-md-2 col-sm-3">Telefono</label>
+              <div class="col-sm-6">
+                <input type="text" formControlName="telefono" id="telefono"  maxlength="9" class="form-control" />
+              </div>
+            </div>
+
+          </div>
+
+        </form>
+
+        <hr>
+        <div class="modal-footer">
+          <button *ngIf="!isEdit" type="button" class="btn btn-primary mb-3 mt-2" style="margin-right: 2rem !important;"
+            (click)="registrarEntidad()">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            Guardar
+          </button>
+          <button *ngIf="isEdit" type="button" class="btn btn-primary mb-3 mt-2" style="margin-right: 2rem !important;"
+            (click)="actualizarEntidad()">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            Actualizar
+          </button>
+          <button type="button" class="btn btn-primary mb-3 mt-2" (click)="limpiar()">
+            <i class="fa fa-eraser" aria-hidden="true"></i>
+            Limpiar
+          </button>
+        </div>
+      </fieldset>
+      <div class="container mt-4">
+        <h2>Lista entidades</h2>
+        <table class="table table-bordered table-hover table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th>Num. documento</th>
+              <th>Razón social</th>
+              <th>Nombre comercial</th>
+              <th>Direccion</th>
+              <th>Telefono</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let persona of listEntidad">
+              <td>{{ persona.nroDocumento }}</td>
+              <td>{{ persona.rSocial }}</td>
+              <td>{{ persona.nomComercial }}</td>
+              <td>{{ persona.direccion }}</td>
+              <td>{{ persona.telefono }}</td>
+              <td><button class="btn btn-sm btn-success" (click)="editarCampos(persona)">Editar</button>&nbsp;
+                <button class="btn btn-sm btn-danger" (click)=" eliminarEntidad(persona)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</main>
+</mat-sidenav-container>

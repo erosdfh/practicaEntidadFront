@@ -1,0 +1,16 @@
+mat-sidenav{
+    width: 100%;
+    padding-top: 100px;
+    background-color: #fff;
+    display: block;
+}
+mat-toolbar ul li a:hover {
+  color: #1266f1;
+}
+app-header{
+    position: sticky;
+position: -webkit-sticky;
+display: block;
+    top: 0;
+    z-index: 1000;
+}

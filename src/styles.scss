@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #ddd; }
+:root {
+
+    --primary: #19AFFF;
+  
+    --secondary:#007832;
+  
+    --dark: #00517D;
+  
+  }
+
+  fieldset.linea-caja {
+    border: 1px solid #ddd;
+    min-width: 0;
+    padding: 0 9px 7px 9px;
+    margin: 0 0;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+  }
+  
+  .linea-caja legend {
+    color: #37383a;
+    text-align: left;
+    font-size: 1.3rem;
+    width: auto;
+    padding: 0 10px;
+    margin-top: -15px;
+    background-color: white;
+    border-bottom: none;
+  }
+
+  

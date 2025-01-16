@@ -1,0 +1,9 @@
+<app-header (SidenavToggle)="sidenav.toggle()"></app-header>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation" position="end" [fixedInViewport]="true">
+    <app-side-nav (CloseSidenav)="sidenav.close()"></app-side-nav>
+  </mat-sidenav>
+  <main>
+    <p>tipo-documento</p>
+</main>
+</mat-sidenav-container>
